@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h5>Submit a Covid Form</h5>
+<h5>מילוי פרטי בדיקה</h5>
 
 <form method="post" >
 
@@ -14,7 +14,10 @@
         </div>
     {% endfor %}
 </div>
+<div class="d-flex justify-content-between">
   <button type="submit" class="btn btn-primary">Save</button>
+    <input class="btn btn-danger" type="button" value="נקה טופס" onClick="this.form.reset()" />
+    </div>
 </form>
 
 <script>
