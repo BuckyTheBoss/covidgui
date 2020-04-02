@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <ul class="list-group">
+    {% for object in objects %}
+        <li class="list-group-item">
+
+            <div class="justify-content-between">
+
+                    טופס עבור ת"ז {{ object.ID_num }}
+                <div class="float-right">
+                <a href="{% url 'edit_form' object.id %}" class="btn btn-info">ערוך טופס</a>
+                <a href="{% url 'delete_form' object.id %}" class="btn btn-danger">מחק טופס</a>
+</div>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
