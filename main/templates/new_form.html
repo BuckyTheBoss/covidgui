@@ -4,27 +4,7 @@
 <h5>Submit a Covid Form</h5>
 
 <form method="post" >
- <div class="row sticky-top justify-content-center">
- <div class="col-3">
-  {% if previous_id %}
-        <a href="{% url 'edit_form' previous_id %}" class="btn btn-success">Previous Form</a>
-     {% endif %}
- </div>
- <div class="col-3">
 
-        <input class="btn btn-danger" type="button" value="Reset Form" onClick="this.form.reset()" />
- </div>
-  <div class="col-3">
-
-        <a href="{% url 'export' object.id %}" class="btn btn-warning">Export</a>
- </div>
-  <div class="col-3">
-
-     {% if next_id %}
-        <a href="{% url 'edit_form' next_id %}" class="btn btn-info">Next Form</a>
-     {% endif %}
-</div>
-    </div>
     {% csrf_token %}
 <div class="row">
     {% for field in form %}
