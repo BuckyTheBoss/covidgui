@@ -3,7 +3,7 @@
 {% block content %}
 <h5>מילוי פרטי בדיקה</h5>
 
-<form method="post" >
+<form method="post" id="myForm">
 
     {% csrf_token %}
 <div class="row">
@@ -25,6 +25,7 @@
     $("#id_take_date").datepicker();
   });
 </script>
+
 <script>
   $(function () {
     $("#id_get_date").datepicker();
@@ -34,5 +35,16 @@
   $(function () {
     $("#id_result_date").datepicker();
   });
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js"></script>
+    <script>
+  $(function() {
+    $('#myForm').areYouSure(
+      {
+        message: 'אם תעזוב עכשיו השינויים לא יישמרו, נא לשמור את הטופס על מנת שלא לאבד מידע'
+      }
+    );
+  });
+
 </script>
 {% endblock %}

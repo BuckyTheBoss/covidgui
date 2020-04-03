@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h5>">עריכת פרטי בדיקה</h5>
-<form method="post" >
+<h5>עריכת פרטי בדיקה</h5>
+<form method="post" id="myForm">
  <div class="row sticky-top ">
  <div class="col-4 d-flex justify-content-center">
   {% if previous_id %}
@@ -47,5 +47,16 @@
   $(function () {
     $("#id_result_date").datepicker();
   });
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js"></script>
+    <script>
+  $(function() {
+    $('#myForm').areYouSure(
+      {
+        message: 'אם תעזוב עכשיו השינויים לא יישמרו, נא לשמור את הטופס על מנת שלא לאבד מידע'
+      }
+    );
+  });
+
 </script>
 {% endblock %}

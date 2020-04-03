@@ -10,7 +10,7 @@ from django.forms.models import model_to_dict
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
 
 def index(request):
     return render(request, 'index.html')
@@ -94,6 +94,7 @@ def signup(request):
         if form.is_valid():
             key = form.cleaned_data.get('key')
             if key != 'helloworld':
+                messages.warning(request, 'קוד הרשמה שגוי, נא לפנות למנהל המערכת')
                 return redirect('signup')
             form.save()
             username = form.cleaned_data.get('username')
@@ -101,9 +102,8 @@ def signup(request):
 
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('homepage')
-        for field, error in form.errors.items():
-            print(field, error)
+            messages.success(request, 'נרשמת בהצלחה!')
+            return redirect('new_form')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
