@@ -40,7 +40,7 @@ class CovidDataForm(forms.ModelForm):
             'method_desc': 'תאור שיטה',
             'section_code': 'קוד מדור מבצע',
             'section_desc': 'תאור מדור מבצע',
-            'tested_desc': 'קוד גורם נבדק',
+            'tested_desc': 'תאור גורם נבדק',
             'take_date': 'תאריך לקיחה',
             'get_date': 'תאריך קבלה',
             'result_date': 'תאריך תוצאה',

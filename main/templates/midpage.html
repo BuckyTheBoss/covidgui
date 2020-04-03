@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+     <a hidden href="{% url 'edit_form' cid %}" id="redirect" class="btn btn-info "></a>
+    <a hidden href="{% url 'export' cid %}" id="download" class="btn btn-warning "></a>
+
+    <script>
+
+        async function delay(delayInms) {
+      return new Promise(resolve  => {
+        setTimeout(() => {
+          resolve(2);
+        }, delayInms);
+      });
+    }
+    async function sample() {
+      document.getElementById("download").click();
+      console.log('waiting...')
+      let delayres = await delay(3000);
+      document.getElementById("redirect").click();
+    }
+    sample();
+    </script>
+{% endblock %}

@@ -71,13 +71,26 @@ class DeleteCovidView(DeleteView):
     pk_url_kwarg = 'covid_pk'
     template_name = 'confirm_delete.html'
 
+@login_required
+def save_and_export(request):
+    if request.method != 'POST':
+        return redirect('list_forms')
+    form = CovidDataForm(request.POST)
+    if form.is_valid():
+        data = form.save(commit=False)
+        data.created_by = request.user
+        data.save()
+    else:
+        for field, error in form.errors.items():
+            messages.warning(request, error)
+        return redirect('list_forms')
+    return render(request, 'midpage.html', {'cid': data.pk})
 
 @login_required
 def export(request, covid_id):
     data = model_to_dict(CovidData.objects.get(id=covid_id))
     del data['id']
     del data['created_by']
-    print(data)
     for key, value in data.items():
         if isinstance(value, datetime.date):
             date_string = value.strftime('%d%m%y')

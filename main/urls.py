@@ -9,6 +9,7 @@ urlpatterns = [
     path('edit_form/<int:covid_pk>', login_required(views.UpdateCovidView.as_view()), name='edit_form'),
     path('delete_form/<int:covid_pk>', login_required(views.DeleteCovidView.as_view()), name='delete_form'),
     path('export/<int:covid_id>', views.export, name='export'),
+    path('save_and_export', views.save_and_export, name='save_and_export'),
     path('signup/', views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), {'next_page': '/'}, name='logout'),
