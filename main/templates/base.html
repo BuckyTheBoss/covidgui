@@ -29,5 +29,22 @@
             {% endblock %}
         </div>
     </body>
+<script>
+     var time = new Date().getTime();
+     $(document.body).bind("mousemove keypress", function(e) {
+         time = new Date().getTime();
+     });
+
+     function refresh() {
+         if(new Date().getTime() - time >= 899000)
+             alert('נותקת מהמערכת עקב חוסר פעילות של 15+ דקות, נא רענן עמוד זה');
+         else
+             setTimeout(refresh, 10000);
+     }
+
+     setTimeout(refresh, 10000);
+</script>
+
+
 
 </html>

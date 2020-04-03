@@ -11,6 +11,7 @@ from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import datetime
 
 def index(request):
     return render(request, 'index.html')
@@ -77,15 +78,21 @@ def export(request, covid_id):
     del data['id']
     del data['created_by']
     print(data)
-    keys = [key for key in data.keys()]
-    values = [value for value in data.values()]
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = f'attachment; filename="{data["ID_num"]}.csv"'
-    writer = csv.writer(response)
-    writer.writerow(keys)
-    writer.writerow(values)
+    for key, value in data.items():
+        if isinstance(value, datetime.date):
+            date_string = value.strftime('%d%m%y')
+            data[key] = date_string
 
+    values = [str(value) for value in data.values()]
+
+    filename = "my-file.rtf"
+    content = ';'.join(values)
+    content_1255 = content.encode('windows-1255')
+    response = HttpResponse(content_1255, content_type='text/plain')
+    response['Content-Disposition'] = f'attachment; filename={filename}'
     return response
+
+
 
 
 def signup(request):
