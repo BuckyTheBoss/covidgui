@@ -25,7 +25,7 @@ SECRET_KEY = '@gav^8d!nbph1$ptj5&6_zn+1#2kfs26n$#z+uu8q$+e=5f-tz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'covidgui.pythonanywhere.com']
 
 
 # Application definition
