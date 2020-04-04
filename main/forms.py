@@ -2,6 +2,7 @@ from django import forms
 from .models import CovidData
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from dal import autocomplete
 
 
 class SignUpForm(UserCreationForm):
@@ -13,12 +14,13 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2', )
         labels = {
-            'username' : 'שם משתמש',
-            'first_name' : 'שם פרטי',
-            'last_name' : 'שם משפחה',
-            'password1' : 'סיסמא',
-            'password2' : 'אישור סיסמא',
+            'username': 'שם משתמש',
+            'first_name': 'שם פרטי',
+            'last_name': 'שם משפחה',
+            'password1': 'סיסמא',
+            'password2': 'אישור סיסמא',
         }
+
 
 class CovidDataForm(forms.ModelForm):
     class Meta:
@@ -51,5 +53,8 @@ class CovidDataForm(forms.ModelForm):
             'sender_name': 'שם גורם שולח',
             'sender_full_name': 'שם גורם שולח מלא',
             'result_test_corona': 'קוד תוצאה'
+        }
+        widgets = {
+            'ID_num': autocomplete.ModelSelect2(url='tz_autocomplete')
         }
 

@@ -1,36 +1,42 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 <h5>עריכת פרטי בדיקה</h5>
-<form method="post" id="myForm">
+<form method="post" id="myForm" class="mb-5">
  <div class="row sticky-top ">
- <div class="col-4 d-flex justify-content-center">
+ <div class="col-3 d-flex justify-content-center">
   {% if previous_id %}
         <a href="{% url 'edit_form' previous_id %}" class="btn btn-success">טופס קודם</a>
      {% endif %}
  </div>
 
-  <div class="col-4 d-flex justify-content-center">
+  <div class="col-3 d-flex justify-content-center">
 
         <a href="{% url 'export' object.id %}" class="btn btn-warning">ייצוא</a>
  </div>
-  <div class="col-4 d-flex justify-content-center">
+ <div class="col-3 d-flex justify-content-center">
+
+ <button type="submit" class="btn btn-primary">שמור</button>
+ </div>
+  <div class="col-3 d-flex justify-content-center">
 
      {% if next_id %}
         <a href="{% url 'edit_form' next_id %}" class="btn btn-info">טופס הבא</a>
      {% endif %}
 </div>
+
     </div>
     {% csrf_token %}
 <div class="row">
     {% for field in form %}
-        <div class="col-3">
+        <div class="col-4">
             {{ field.errors }}
             {{ field|as_crispy_field }}
         </div>
     {% endfor %}
 </div>
-  <button type="submit" class="btn btn-primary">שמור</button>
+
 </form>
 
 <script>
@@ -59,4 +65,14 @@
   });
 
 </script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/select2.css' %}" />
+    <script type="text/javascript" src="{% static 'autocomplete_light/jquery.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/select2.js' %}"></script>
+    <link type="text/css" rel="{% static 'autocomplete_light/select2.css' %}">
+    <script type="text/javascript" src="{% static 'vendor/select2/dist/js/select2.full.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/forward.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    {{ form.media }}
 {% endblock %}

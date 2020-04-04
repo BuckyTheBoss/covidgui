@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from .models import CovidData
+from .models import CovidData, TZ
 from.forms import CovidDataForm
 from django.http import HttpResponse
 from .resources import CovidResource
@@ -10,8 +10,11 @@ from django.forms.models import model_to_dict
 from .forms import SignUpForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Permission
 from django.contrib import messages
 import datetime
+from dal import autocomplete
+
 
 def index(request):
     return render(request, 'index.html')
@@ -121,9 +124,20 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
 
             user = authenticate(username=username, password=raw_password)
+            permission = Permission.objects.get(codename='add_tz')
+            user.user_permissions.add(permission)
             login(request, user)
+
             messages.success(request, 'נרשמת בהצלחה!')
             return redirect('new_form')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+class TZAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        qs = TZ.objects.all()
+        if self.q:
+            qs = qs.filter(num__istartswith=self.q)
+        return qs

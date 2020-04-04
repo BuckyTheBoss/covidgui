@@ -47,4 +47,4 @@ env/
 !**/migrations
 !**/migrations/__init__.py
 static/
-/podkeeper/podkeeper/local_settings.py
+/covidform/local_settings.py

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 <h5>מילוי פרטי בדיקה</h5>
 
@@ -8,15 +9,15 @@
     {% csrf_token %}
 <div class="row">
     {% for field in form %}
-        <div class="col-3">
+        <div class="col-4">
             {{ field.errors }}
             {{ field|as_crispy_field }}
         </div>
     {% endfor %}
 </div>
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between mb-5">
   <button type="submit" class="btn btn-primary">Save</button>
-  <button type="submit" formaction="{% url 'save_and_export' %}">Save & export</button>
+  <button class="btn btn-info" type="submit" formaction="{% url 'save_and_export' %}">Save & export</button>
     <input class="btn btn-danger" type="button" value="נקה טופס" onClick="this.form.reset()" />
     </div>
 </form>
@@ -48,4 +49,14 @@
   });
 
 </script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/select2.css' %}" />
+    <script type="text/javascript" src="{% static 'autocomplete_light/jquery.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.init.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/select2.js' %}"></script>
+    <link type="text/css" rel="{% static 'autocomplete_light/select2.css' %}">
+    <script type="text/javascript" src="{% static 'vendor/select2/dist/js/select2.full.js' %}"></script>
+    <script type="text/javascript" src="{% static 'autocomplete_light/forward.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    {{ form.media }}
 {% endblock %}

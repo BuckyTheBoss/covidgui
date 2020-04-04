@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-from django.contrib.messages import constants as messages
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -19,18 +18,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@gav^8d!nbph1$ptj5&6_zn+1#2kfs26n$#z+uu8q$+e=5f-tz'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'covidgui.pythonanywhere.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,19 +116,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-DATE_INPUT_FORMATS = ['%d%m%Y']
-IMPORT_EXPORT_USE_TRANSACTIONS = True
-LOGIN_REDIRECT_URL = 'new_form'
-LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = '/'
-MESSAGE_TAGS = {
-    messages.DEBUG: 'alert-info',
-    messages.INFO: 'alert-info',
-    messages.SUCCESS: 'alert-success',
-    messages.WARNING: 'alert-warning',
-    messages.ERROR: 'alert-danger',
-}
 
-SESSION_COOKIE_AGE = 900
-SESSION_SAVE_EVERY_REQUEST = True
+
+# Load local settings
+try:
+   from .local_settings import *
+except ImportError:
+    raise Exception('A local_settings.py file is required to run this project')
