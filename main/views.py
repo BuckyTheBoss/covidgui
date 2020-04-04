@@ -14,7 +14,7 @@ from django.contrib.auth.models import Permission
 from django.contrib import messages
 import datetime
 from dal import autocomplete
-
+from django.conf import settings
 
 def index(request):
     return render(request, 'index.html')
@@ -116,7 +116,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             key = form.cleaned_data.get('key')
-            if key != 'helloworld':
+            if key != settings.SIGNUP_KEY:
                 messages.warning(request, 'קוד הרשמה שגוי, נא לפנות למנהל המערכת')
                 return redirect('signup')
             form.save()

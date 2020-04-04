@@ -23,3 +23,4 @@ MESSAGE_TAGS = {
 # How long after idling a user is logged out, in seconds
 SESSION_COOKIE_AGE = 900
 SESSION_SAVE_EVERY_REQUEST = True
+SIGNUP_KEY = 'SOME-STRING'
