@@ -1,21 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
-
-
-class TZ(models.Model):
-    num = models.CharField(max_length=10, unique=True)
-
-    def __str__(self):
-        return self.num
 
 
 class CovidData(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True )
     lab_code = models.CharField(max_length=5, default='41997')
     lab_desc = models.CharField(max_length=30, default='מעבדת אוניברסיטת תל אביב')
-    ID_num = models.ForeignKey(TZ, on_delete=models.CASCADE)
+    ID_num = models.CharField(max_length=10)
     last_name = models.CharField(max_length=50)
     first_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=[('ז','זכר'),('נ','נקבה')])
@@ -24,17 +18,17 @@ class CovidData(models.Model):
     sticker_number = models.CharField(max_length=9)
     internal_code = models.CharField(max_length=2, null=True, blank=True, default=' ')
     internal_number = models.CharField(max_length=8, null=True, blank=True, default=' ')
-    spec_code = models.CharField(max_length=30)
-    spec_desc = models.CharField(max_length=150)
-    method_code = models.CharField(max_length=4)
-    method_desc = models.CharField(max_length=30)
+    spec_code = models.CharField(max_length=30, default='RNA')
+    spec_desc = models.CharField(max_length=150, default='חומר גנטי')
+    method_code = models.CharField(max_length=4, default='qPCR')
+    method_desc = models.CharField(max_length=30, default='אמפליפיקציה של חומר גנומי')
     section_code = models.CharField(max_length=4, null=True, blank=True, default=' ')
     section_desc = models.CharField(max_length=30, null=True, blank=True, default=' ')
     tested_code = models.CharField(max_length=9, default="259")
     tested_desc = models.CharField(max_length=30)
     take_date = models.DateField()
     get_date = models.DateField()
-    result_date = models.DateField()
+    result_date = models.DateField(default=datetime.datetime.now().date())
     result = models.CharField(max_length=30)
     remark = models.TextField(max_length=2000, default='', blank=True)
     id_type = models.IntegerField(choices=[(0,'ת"ז ישראלי - 0'),(1, 'ת"ז ישראלי - 1'),(2, 'דרכון - 2'),(3, 'אחר - 3')])

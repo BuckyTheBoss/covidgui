@@ -2,10 +2,23 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>התחברות</h1>
+    <div class="row">
+<h1 class="float-right">התחברות למערכת</h1>
+    </div>
 <form method="post">
     {% csrf_token %}
-    {{ form | crispy }}
+   <div id="div_id_username" class="form-group">
+       <label for="id_username" class=" requiredField" class="float-right">שם משתמש<span class="asteriskField">*</span> </label>
+            <div class="">
+                <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput form-control" required id="id_username">
+            </div>
+   </div>
+    <div id="div_id_password" class="form-group">
+        <label for="id_password" class=" requiredField" class="float-right">סיסמא<span class="asteriskField">*</span> </label>
+        <div class="">
+            <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required id="id_password">
+        </div>
+    </div>
 
   <button type="submit" class="btn btn-primary">התחברות</button>
 </form>

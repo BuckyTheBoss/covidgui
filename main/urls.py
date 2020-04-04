@@ -14,5 +14,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), {'next_page': '/'}, name='logout'),
     path('', views.index, name='homepage'),
-    path('tz-autocomplete/', views.TZAutocomplete.as_view(create_field='num'), name='tz_autocomplete'),
+    path('search', views.search_tz, name='search'),
+    path('search_date', views.search_date, name='search_date'),
+
 ]

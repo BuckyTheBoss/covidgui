@@ -54,7 +54,5 @@ class CovidDataForm(forms.ModelForm):
             'sender_full_name': 'שם גורם שולח מלא',
             'result_test_corona': 'קוד תוצאה'
         }
-        widgets = {
-            'ID_num': autocomplete.ModelSelect2(url='tz_autocomplete')
-        }
+
 

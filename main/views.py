@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from .models import CovidData, TZ
+from .models import CovidData
 from.forms import CovidDataForm
 from django.http import HttpResponse
 from .resources import CovidResource
@@ -15,6 +15,8 @@ from django.contrib import messages
 import datetime
 from dal import autocomplete
 from django.conf import settings
+from django.db.models import Q
+
 
 def index(request):
     return render(request, 'index.html')
@@ -109,8 +111,6 @@ def export(request, covid_id):
     return response
 
 
-
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -134,10 +134,18 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+@login_required
+def search_tz(request):
+    objects = None
+    if request.method == 'POST':
+        text = request.POST.get('search_tz')
+        objects = CovidData.objects.filter(ID_num__icontains=text)
+    return render(request, 'search.html', {'objects': objects})
 
-class TZAutocomplete(autocomplete.Select2QuerySetView):
-    def get_queryset(self):
-        qs = TZ.objects.all()
-        if self.q:
-            qs = qs.filter(num__istartswith=self.q)
-        return qs
+@login_required
+def search_date(request):
+    objects = None
+    if request.method == 'POST':
+        date_string = request.POST.get('search_date')
+        objects = CovidData.objects.filter(result_date=datetime.datetime.strptime(date_string, '%m/%d/%Y').date())
+    return render(request, 'search.html', {'objects': objects})

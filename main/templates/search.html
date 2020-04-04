@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-6">
+        <h5 class="float-right">חיפוש ע"י ת"ז</h5>
+    </div>
+    <div class="col-6">
+        <h5 class="float-right">חיפוש ע"י תאריך ביצוע בדיקה</h5>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-6">
+
+        <form method="POST" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+              {% csrf_token %}
+              <input type="text" name='search_tz' class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
+              <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-6">
+        <form method="POST" action="{% url 'search_date' %}" class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
+            <input type="text" name="search_date" class="dateinput form-control" required id="datetimepicker1">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+{% if objects %}
+
+    <ul class="list-group mt-5">
+        {% for object in objects %}
+            <li class="list-group-item">
+
+                <div class="justify-content-between">
+
+                        טופס עבור ת"ז {{ object.ID_num }}
+                    <div class="float-right">
+                         <a href="{% url 'edit_form' object.id %}" class="btn btn-info">ערוך טופס</a>
+                         <a href="{% url 'delete_form' object.id %}" class="btn btn-danger">מחק טופס</a>
+                         <a href="{% url 'export' object.id %}" class="btn btn-warning">ייצוא טופס</a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<script>
+  $(function () {
+    $("#datetimepicker1").datepicker();
+  });
+</script>
+
+{% endblock %}

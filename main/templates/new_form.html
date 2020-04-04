@@ -16,11 +16,14 @@
     {% endfor %}
 </div>
 <div class="d-flex justify-content-between mb-5">
-  <button type="submit" class="btn btn-primary">Save</button>
-  <button class="btn btn-info" type="submit" formaction="{% url 'save_and_export' %}">Save & export</button>
-    <input class="btn btn-danger" type="button" value="נקה טופס" onClick="this.form.reset()" />
+  <button type="submit" class="btn btn-primary">שמירת טופס</button>
+  <button class="btn btn-warning" type="submit" formaction="{% url 'save_and_export' %}">שמירה וייצוא</button>
+    <input class="btn btn-danger" type="button" value="ניקוי טופס" onClick="this.form.reset()" />
     </div>
 </form>
+{# <!-- Tempus Dominus Bootstrap 4 -->#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>#}
 
 <script>
   $(function () {
@@ -49,14 +52,5 @@
   });
 
 </script>
-    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'autocomplete_light/select2.css' %}" />
-    <script type="text/javascript" src="{% static 'autocomplete_light/jquery.init.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.init.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/select2.js' %}"></script>
-    <link type="text/css" rel="{% static 'autocomplete_light/select2.css' %}">
-    <script type="text/javascript" src="{% static 'vendor/select2/dist/js/select2.full.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/forward.js' %}"></script>
-    <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
-    {{ form.media }}
+
 {% endblock %}
