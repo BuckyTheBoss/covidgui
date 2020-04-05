@@ -19,6 +19,8 @@ from django.db.models import Q
 
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('search')
     return render(request, 'index.html')
 
 
@@ -136,7 +138,7 @@ def signup(request):
 
 @login_required
 def search_tz(request):
-    objects = None
+    objects = CovidData.objects.all().order_by('result_date')
     if request.method == 'POST':
         text = request.POST.get('search_tz')
         objects = CovidData.objects.filter(ID_num__icontains=text)
