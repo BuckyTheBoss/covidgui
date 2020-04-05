@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 import datetime
 
 # Create your models here.
@@ -13,7 +14,7 @@ class CovidData(models.Model):
     last_name = models.CharField(max_length=50)
     first_name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=[('ז','זכר'),('נ','נקבה')])
-    year_of_birth = models.CharField(max_length=4)
+    year_of_birth = models.CharField(max_length=4, choices=[(str(num),str(num)) for num in range(2020,1919,-1)])
     year_of_sticker = models.CharField(max_length=4, default='2020')
     sticker_number = models.CharField(max_length=9)
     internal_code = models.CharField(max_length=2, null=True, blank=True, default=' ')
@@ -28,7 +29,7 @@ class CovidData(models.Model):
     tested_desc = models.CharField(max_length=30)
     take_date = models.DateField()
     get_date = models.DateField()
-    result_date = models.DateField(default=datetime.datetime.now().date())
+    result_date = models.DateField(default=timezone.now())
     result = models.CharField(max_length=30)
     remark = models.TextField(max_length=2000, default='', blank=True)
     id_type = models.IntegerField(choices=[(0,'ת"ז ישראלי - 0'),(1, 'ת"ז ישראלי - 1'),(2, 'דרכון - 2'),(3, 'אחר - 3')])

@@ -54,5 +54,8 @@ class CovidDataForm(forms.ModelForm):
             'sender_full_name': 'שם גורם שולח מלא',
             'result_test_corona': 'קוד תוצאה'
         }
+        widgets = {
+            'result_date': forms.DateInput(format="%m/%d/%Y")
+        }
 
 

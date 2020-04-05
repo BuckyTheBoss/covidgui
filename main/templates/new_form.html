@@ -8,18 +8,13 @@
 
     {% csrf_token %}
 <div class="row">
-    {% for field in form %}
-        <div class="col-4">
-            {{ field.errors }}
-            {{ field|as_crispy_field }}
-        </div>
-    {% endfor %}
+    {% include 'temp.html' with form=form %}
 </div>
 <div class="d-flex justify-content-between mb-5">
-  <button type="submit" class="btn btn-primary">שמירת טופס</button>
-  <button class="btn btn-warning" type="submit" formaction="{% url 'save_and_export' %}">שמירה וייצוא</button>
     <input class="btn btn-danger" type="button" value="ניקוי טופס" onClick="this.form.reset()" />
-    </div>
+    <button class="btn btn-warning" type="submit" formaction="{% url 'save_and_export' %}">שמירה וייצוא</button>
+    <button type="submit" class="btn btn-primary">שמירת טופס</button>
+</div>
 </form>
 {# <!-- Tempus Dominus Bootstrap 4 -->#}
 {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha256-XPTBwC3SBoWHSmKasAk01c08M6sIA5gF5+sRxqak2Qs=" crossorigin="anonymous" />#}

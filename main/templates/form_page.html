@@ -29,12 +29,7 @@
     </div>
     {% csrf_token %}
 <div class="row">
-    {% for field in form %}
-        <div class="col-4">
-            {{ field.errors }}
-            {{ field|as_crispy_field }}
-        </div>
-    {% endfor %}
+     {% include 'temp.html' with form=form %}
 </div>
 
 </form>
