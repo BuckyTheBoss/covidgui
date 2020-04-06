@@ -2,6 +2,7 @@ from django import forms
 from .models import CovidData
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.validators import RegexValidator
 from dal import autocomplete
 
 

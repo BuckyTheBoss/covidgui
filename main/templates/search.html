@@ -36,7 +36,8 @@
 
                 <div class="justify-content-between">
 
-                        טופס עבור ת"ז {{ object.ID_num }}
+               <h6>                    טופס עבור ת"ז: {{ object.ID_num }}                     | <span class='h6' dir="ltr">41997.Negifim.{{ object.result_date|date:'dmY' }}.{{ object.id }}</span>
+</h6>
                     <div class="float-right">
                          <a href="{% url 'edit_form' object.id %}" class="btn btn-info">ערוך טופס</a>
                          <a href="{% url 'delete_form' object.id %}" class="btn btn-danger">מחק טופס</a>

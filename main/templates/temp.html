@@ -1,141 +1,169 @@
 <div class="row">
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.ID_num.errors }}
-        {{ form.ID_num.label }}
+         <div class="float-right"><label for="{{ form.ID_num.id_for_label }}">ת"ז*:</label></div>
         {{ form.ID_num }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.id_type.errors }}
-        {{ form.id_type.label }}
+        <div class="float-right"><label for="{{ form.id_type.id_for_label }}">סוג תעודה*:</label></div>
         {{ form.id_type }}
     </div>
-    <div class="col-3"></div>
-    <div class="col-3"></div>
-    <div class="col-3 mt-1">
-        {{ form.first_name.errors }}
-        {{ form.first_name.label }}
-        {{ form.first_name }}
-    </div>
-    <div class="col-3">
-        {{ form.last_name.errors }}
-        {{ form.last_name.label }}
-        {{ form.last_name }}
-    </div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.gender.errors }}
-        {{ form.gender.label }}
+        <div class="float-right"><label for="{{ form.gender.id_for_label }}">מין*:</label></div>
         {{ form.gender }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.year_of_birth.errors }}
-        {{ form.year_of_birth.label }}
+        <div class="float-right"><label for="{{ form.year_of_birth.id_for_label }}">שנת לידה*:</label></div>
         {{ form.year_of_birth }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
+        {{ form.first_name.errors }}
+        <div class="float-right"><label for="{{ form.first_name.id_for_label }}">שם פרטי*:</label></div>
+        {{ form.first_name }}
+    </div>
+    <div class="col-4 mt-2">
+        {{ form.last_name.errors }}
+        <div class="float-right"><label for="{{ form.last_name.id_for_label }}">שם משפחה*:</label></div>
+        {{ form.last_name }}
+    </div>
+    <div class="col-4 mt-2"></div>
+
+    <div class="col-4 mt-2">
         {{ form.sticker_number.errors }}
-        {{ form.sticker_number.label }}
+        <div class="float-right"><label for="{{ form.sticker_number.id_for_label }}">מספר מדבקה*:</label></div>
         {{ form.sticker_number }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div><div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.internal_code.errors }}
-        {{ form.internal_code.label }}
+        <div class="float-right"><label for="{{ form.internal_code.id_for_label }}">קוד פנימי:</label></div>
         {{ form.internal_code }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.internal_number.errors }}
-        {{ form.internal_number.label }}
+        <div class="float-right"><label for="{{ form.internal_number.id_for_label }}">מספר פנימי:</label></div>
         {{ form.internal_number }}
     </div>
-        <div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+        <div class="col-3"></div>
+    <div class="col-4 mt-2">
         {{ form.spec_code.errors }}
-        {{ form.spec_code.label }}
+        <div class="float-right"><label for="{{ form.spec_code.id_for_label }}">קוד חומר דגימה*:</label></div>
         {{ form.spec_code }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.spec_desc.errors }}
-        {{ form.spec_desc.label }}
+        <div class="float-right"><label for="{{ form.spec_desc.id_for_label }}">תאור חומר דגימה*:</label></div>
         {{ form.spec_desc }}
     </div>
-         <div class="col-3"></div><div class="col-3"></div>
-
-    <div class="col-3">
+         <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.method_code.errors }}
-        {{ form.method_code.label }}
+        <div class="float-right"><label for="{{ form.method_code.id_for_label }}">קוד שיטה*:</label></div>
         {{ form.method_code }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.method_desc.errors }}
-        {{ form.method_desc.label }}
+        <div class="float-right"><label for="{{ form.method_desc.id_for_label }}">תאור שיטה*:</label></div>
         {{ form.method_desc }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.section_code.errors }}
-        {{ form.section_code.label }}
+       <div class="float-right"><label for=" {{ form.section_code.id_for_label }}">קוד מדור מבצע*:</label></div>
         {{ form.section_code }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.section_desc.errors }}
-        {{ form.section_desc.label }}
+        <div class="float-right"><label for="{{ form.section_desc.id_for_label }}">תאור מדור מבצע*:</label></div>
         {{ form.section_desc }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.sender_code.errors }}
-        {{ form.sender_code.label }}
+      <div class="float-right"><label for="  {{ form.sender_code.id_for_label }}">קוד גורם שולח*:</label></div>
         {{ form.sender_code }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.sender_name.errors }}
-        {{ form.sender_name.label }}
+        <div class="float-right"><label for="{{ form.sender_name.id_for_label }}">שם גורם שולח:</label></div>
         {{ form.sender_name }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.sender_full_name.errors }}
-        {{ form.sender_full_name.label }}
+        <div class="float-right"><label for="{{ form.sender_full_name.id_for_label }}">שם גורם שולח מלא:</label></div>
         {{ form.sender_full_name }}
     </div>
-    <div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.tested_desc.errors }}
-        {{ form.tested_desc.label }}
+        <div class="float-right"><label for="{{ form.tested_desc.id_for_label }}">תאור גורם נבדק*:</label></div>
         {{ form.tested_desc }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div><div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.take_date.errors }}
-        {{ form.take_date.label }}
+        <div class="float-right"><label for="{{ form.take_date.id_for_label }}">תאריך לקיחה*:</label></div>
         {{ form.take_date }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div><div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.get_date.errors }}
-        {{ form.get_date.label }}
+        <div class="float-right"><label for="{{ form.get_date.id_for_label }}">תאריך קבלה*:</label></div>
         {{ form.get_date }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.result_date.errors }}
-        {{ form.result_date.label }}
+        <div class="float-right"><label for="{{ form.result_date.id_for_label }}">תאריך תוצאה*:</label></div>
         {{ form.result_date  }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.result_test_corona.errors }}
-        {{ form.result_test_corona.label }}
+        <div class="float-right"><label for="{{ form.result_test_corona.id_for_label }}">קוד תוצאה*:</label></div>
         {{ form.result_test_corona }}
     </div>
-    <div class="col-3">
+    <div class="col-4 mt-2">
         {{ form.result.errors }}
-        {{ form.result.label }}
+        <div class="float-right"><label for="{{ form.result.id_for_label }}">תוצאה:</label></div>
         {{ form.result }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div>
-    <div class="col-3">
+    <div class="col-4 mt-2"></div>
+    <div class="col-4 mt-2">
         {{ form.remark.errors }}
-        {{ form.remark.label }}
+        <div class="float-right"><label for="{{ form.remark.id_for_label }}">הערה:</label></div>
         {{ form.remark }}
     </div>
-    <div class="col-3"></div><div class="col-3"></div><div class="col-3"></div>
+    <div class="col-4 mt-2"></div><div class="col-4 mt-2"></div>
 </div>
+
+<script>
+  $(function () {
+    $("#id_take_date").datepicker();
+  });
+</script>
+
+<script>
+  $(function () {
+    $("#id_get_date").datepicker();
+  });
+</script>
+<script>
+  $(function () {
+    $("#id_result_date").datepicker();
+  });
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.AreYouSure/1.9.0/jquery.are-you-sure.min.js"></script>
+    <script>
+  $(function() {
+    $('#myForm').areYouSure(
+      {
+        message: 'אם תעזוב עכשיו השינויים לא יישמרו, נא לשמור את הטופס על מנת שלא לאבד מידע'
+      }
+    );
+  });
+
+</script>

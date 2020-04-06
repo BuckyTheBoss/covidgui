@@ -16,8 +16,32 @@ import datetime
 from dal import autocomplete
 from django.conf import settings
 from django.db.models import Q
+import os
 
 
+def export_file(covid_id):
+    data = model_to_dict(CovidData.objects.get(id=covid_id))
+    
+    del data['created_by']
+    for key, value in data.items():
+        if isinstance(value, datetime.date):
+            date_string = value.strftime('%d%m%y')
+            data[key] = date_string
+    filename = f"41997.Negifim.{data['result_date']}.{data['id']}.txt"
+    del data['id']
+
+    values = [str(value).encode('windows-1255') for value in data.values()]
+    content = ';'.join(values)
+    content_1255 = content.encode('windows-1255')
+    response = HttpResponse(content_1255, content_type='text/plain')
+    response['Content-Disposition'] = f'attachment; filename={filename}'
+   
+    os.chdir(settings.EXPORT_STRING)
+    with open(filename, 'w') as f:
+        f.write(content_1255)
+        f.close()
+        
+        
 def index(request):
     if request.user.is_authenticated:
         return redirect('search')
@@ -104,12 +128,17 @@ def export(request, covid_id):
             data[key] = date_string
 
     values = [str(value) for value in data.values()]
+    for i, value in enumerate(values):
+        if value == '':
+            values[i] = ' '
+            
 
     filename = "my-file.rtf"
     content = ';'.join(values)
     content_1255 = content.encode('windows-1255')
     response = HttpResponse(content_1255, content_type='text/plain')
     response['Content-Disposition'] = f'attachment; filename={filename}'
+    export_file(covid_id)
     return response
 
 
