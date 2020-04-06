@@ -33,11 +33,12 @@ def export_file(covid_id):
     values = [str(value).encode('windows-1255') for value in data.values()]
     content = ';'.join(values)
     content_1255 = content.encode('windows-1255')
+    
     response = HttpResponse(content_1255, content_type='text/plain')
     response['Content-Disposition'] = f'attachment; filename={filename}'
    
     os.chdir(settings.EXPORT_STRING)
-    with open(filename, 'w') as f:
+    with open(filename, 'wb') as f:
         f.write(content_1255)
         f.close()
         
