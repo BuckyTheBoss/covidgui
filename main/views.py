@@ -38,7 +38,7 @@ def export_file(covid_id):
     response['Content-Disposition'] = f'attachment; filename={filename}'
    
     os.chdir(settings.EXPORT_STRING)
-    with open(filename, 'wb') as f:
+    with open(filename, 'w', encoding='windows-1255') as f:
         f.write(content_1255)
         f.close()
         
