@@ -27,6 +27,9 @@ def export_file(covid_id):
         if isinstance(value, datetime.date):
             date_string = value.strftime('%d%m%y')
             data[key] = date_string
+        if isinstance(value, int):
+            data[key] = str(value)
+            
         if not value:
             data[key] = ' '
     filename = f"41997.Negifim.{data['result_date']}.{data['id']}.txt"
