@@ -121,27 +121,9 @@ def save_and_export(request):
 
 @login_required
 def export(request, covid_id):
-    data = model_to_dict(CovidData.objects.get(id=covid_id))
-    del data['id']
-    del data['created_by']
-    for key, value in data.items():
-        if isinstance(value, datetime.date):
-            date_string = value.strftime('%d%m%y')
-            data[key] = date_string
-
-    values = [str(value) for value in data.values()]
-    for i, value in enumerate(values):
-        if value == '':
-            values[i] = ' '
-            
-
-    filename = "my-file.rtf"
-    content = ';'.join(values)
-    content_1255 = content.encode('windows-1255')
-    response = HttpResponse(content_1255, content_type='text/plain')
-    response['Content-Disposition'] = f'attachment; filename={filename}'
     export_file(covid_id)
-    return response
+    messages.success(request, 'קובץ בדיקה ייוצא בהצלחה')
+    return redirect('search')
 
 
 def signup(request):
