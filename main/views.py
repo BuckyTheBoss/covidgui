@@ -30,7 +30,7 @@ def export_file(covid_id):
     filename = f"41997.Negifim.{data['result_date']}.{data['id']}.txt"
     del data['id']
 
-    values = [str(value).encode('windows-1255') for value in data.values()]
+    values = [value for value in data.values()]
     content = ';'.join(values)
    
     os.chdir(settings.EXPORT_STRING)
