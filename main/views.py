@@ -147,7 +147,7 @@ def create_covid(request):
             data.result_date = result_datetime
             data.sticker_number = sticker_num
             data.ID_num = tz
-            data.result = data.result_test_corona.get_display_value()
+            # data.result = data.result_test_corona.get_display_value()
             data.save()
             return redirect('search')
         for field, error in form.errors.items():
