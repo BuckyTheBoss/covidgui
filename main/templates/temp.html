@@ -71,11 +71,6 @@
     </div>
     <div class="col-4 mt-2"></div>
     <div class="col-4 mt-2">
-        {{ form.sender_code.errors }}
-      <div class="float-right"><label for="  {{ form.sender_code.id_for_label }}">קוד גורם שולח*:</label></div>
-        {{ form.sender_code }}
-    </div>
-    <div class="col-4 mt-2">
         {{ form.sender_name.errors }}
         <div class="float-right"><label for="{{ form.sender_name.id_for_label }}">שם גורם שולח:</label></div>
         {{ form.sender_name }}
@@ -85,6 +80,7 @@
         <div class="float-right"><label for="{{ form.sender_full_name.id_for_label }}">שם גורם שולח מלא:</label></div>
         {{ form.sender_full_name }}
     </div>
+    <div class="col-4 mt-2"></div>
     <div class="col-4 mt-2">
         {{ form.tested_desc.errors }}
         <div class="float-right"><label for="{{ form.tested_desc.id_for_label }}">תאור גורם נבדק*:</label></div>
@@ -108,11 +104,8 @@
         <div class="float-right"><label for="{{ form.result_test_corona.id_for_label }}">קוד תוצאה*:</label></div>
         {{ form.result_test_corona }}
     </div>
-    <div class="col-4 mt-2">
-        {{ form.result.errors }}
-        <div class="float-right"><label for="{{ form.result.id_for_label }}">תוצאה:</label></div>
-        {{ form.result }}
-    </div>
+
+    <div class="col-4 mt-2"></div>
     <div class="col-4 mt-2"></div>
     <div class="col-4 mt-2">
         {{ form.remark.errors }}
