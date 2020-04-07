@@ -139,10 +139,10 @@ def create_covid(request):
                     tz = '0' + tz
 
             # Get data from scanned barcode fields
-            result_date_str = form.cleaned_data['plate_details'].split('/')[0]
+            result_date_str = form.cleaned_data['plate_details'].split('_')[0]
             print(result_date_str)
             result_datetime = datetime.datetime.strptime(result_date_str, '%d-%m-%y')
-            sticker_num = form.cleaned_data['patient_details'].split('/')[1]
+            sticker_num = form.cleaned_data['patient_details'].split('\\')[1]
             data = form.save(commit=False)
             data.created_by = request.user
             data.result_date = result_datetime
