@@ -25,20 +25,22 @@ def export_file(covid):
     del data['created_by']
     del data['exported']
     for key, value in data.items():
+
         if isinstance(value, datetime.date):
             date_string = value.strftime('%d%m%y')
             data[key] = date_string
         if isinstance(value, int):
             data[key] = str(value)
-            
-        if not value:
+
+        if value is None or value == '':
             data[key] = ' '
+
     filename = f"41997.Negifim.{data['result_date']}.{data['id']}.txt"
     del data['id']
 
     values = [value for value in data.values()]
     content = ';'.join(values)
-   
+
     os.chdir(settings.EXPORT_STRING)
     with open(filename, 'w', encoding='windows-1255') as f:
         f.write(content)
@@ -87,6 +89,7 @@ def update_covid(request, covid_id):
                 while len(tz) < 9:
                     tz = '0' + tz
             data = form.save(commit=False)
+            data.result = data.get_result_test_corona_display()
             data.ID_num = tz
             data.save()
             return redirect('search')
@@ -147,6 +150,7 @@ def create_covid(request):
             data.result_date = result_datetime
             data.sticker_number = sticker_num
             data.ID_num = tz
+            data.result = data.get_result_test_corona_display()
             # data.result = data.result_test_corona.get_display_value()
             data.save()
             return redirect('search')
