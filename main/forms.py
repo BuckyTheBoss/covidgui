@@ -30,7 +30,7 @@ class CovidDataForm(forms.ModelForm):
     class Meta:
         model = CovidData
         fields = '__all__'
-        exclude = ['lab_code', 'lab_desc', 'tested_code', 'year_of_sticker', 'created_by', 'sender_code', 'method_code', 'method_desc', 'spec_code', 'spec_desc', 'result_date', 'sticker_number' ]
+        exclude = ['lab_code', 'lab_desc', 'tested_code', 'year_of_sticker', 'created_by', 'sender_code', 'method_code', 'method_desc', 'spec_code', 'spec_desc', 'result_date', 'sticker_number','result' ]
         labels = {
             'gender': "מין",
             'ID_num': 'ת"ז',
@@ -44,7 +44,6 @@ class CovidDataForm(forms.ModelForm):
             'tested_desc': 'תאור גורם נבדק',
             'take_date': 'תאריך לקיחה',
             'get_date': 'תאריך קבלה',
-            'result': 'תוצאה',
             'remark': 'הערה',
             'id_type': 'סוג תעודה',
             'sender_name': 'שם גורם שולח',
