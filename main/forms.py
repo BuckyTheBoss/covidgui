@@ -24,6 +24,9 @@ class SignUpForm(UserCreationForm):
 
 
 class CovidDataForm(forms.ModelForm):
+    plate_details = forms.CharField(required=False)
+    patient_details = forms.CharField(required=False)
+
     class Meta:
         model = CovidData
         fields = '__all__'
@@ -56,7 +59,6 @@ class CovidDataForm(forms.ModelForm):
             'result_test_corona': 'קוד תוצאה'
         }
         widgets = {
-            'result_date': forms.DateInput(format="%m/%d/%Y")
+            'result_date': forms.DateInput(format="%m/%d/%Y"),
+            'remark': forms.Textarea(attrs={'rows': 3, 'cols': 25}),
         }
-
-

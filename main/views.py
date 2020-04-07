@@ -19,10 +19,11 @@ from django.db.models import Q
 import os
 
 
-def export_file(covid_id):
-    data = model_to_dict(CovidData.objects.get(id=covid_id))
+def export_file(covid):
+    data = model_to_dict(covid)
     
     del data['created_by']
+    del data['exported']
     for key, value in data.items():
         if isinstance(value, datetime.date):
             date_string = value.strftime('%d%m%y')
@@ -50,54 +51,6 @@ def index(request):
     return render(request, 'index.html')
 
 
-class NewCovidView(CreateView):
-    model = CovidData
-    form_class = CovidDataForm
-    success_url = reverse_lazy('list_forms')
-    template_name = 'new_form.html'
-
-    def form_valid(self, form):
-        form.instance.created_by = self.request.user
-        return super().form_valid(form)
-
-
-class UpdateCovidView(UpdateView):
-    model = CovidData
-    form_class = CovidDataForm
-    template_name = 'form_page.html'
-    success_url = reverse_lazy('list_forms')
-    pk_url_kwarg = 'covid_pk'
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        qset = list(CovidData.objects.all())
-        obj_index = qset.index(context['object'])
-        try:
-            previous = qset[obj_index - 1]
-        except IndexError:
-            previous = None
-        else:
-            previous = previous.id
-        try:
-            next = qset[obj_index + 1]
-        except IndexError:
-            next = None
-        else:
-            next = next.id
-        if obj_index == 0:
-            previous = None
-        context['next_id'] = next
-        context['previous_id'] = previous
-        return context
-
-
-class ListCovidView(ListView):
-    model = CovidData
-    template_name = 'list_forms.html'
-    context_object_name = 'objects'
-
-
 class DeleteCovidView(DeleteView):
     model = CovidData
     success_url = reverse_lazy('list_forms')
@@ -105,49 +58,57 @@ class DeleteCovidView(DeleteView):
     template_name = 'confirm_delete.html'
 
 @login_required
-def save_and_export(request):
-    if request.method != 'POST':
-        return redirect('list_forms')
-    form = CovidDataForm(request.POST)
-    if form.is_valid():
-        data = form.save(commit=False)
-        data.created_by = request.user
-        data.save()
+def update_covid(request, covid_id):
+    # get id's for next and previous objects if they exist
+    covid = CovidData.objects.get(pk=covid_id)
+    qset = list(CovidData.objects.all())
+    obj_index = qset.index(covid)
+    try:
+        previous = qset[obj_index - 1]
+    except IndexError:
+        previous = None
     else:
+        previous = previous.id
+    try:
+        next = qset[obj_index + 1]
+    except IndexError:
+        next = None
+    else:
+        next = next.id
+    if obj_index == 0:
+        previous = None
+
+    if request.method == 'POST':
+        form = CovidDataForm(request.POST, instance=covid)
+        if form.is_valid():
+            tz = form.cleaned_data['ID_num']
+            # Validate that if field id_type is 0,1 that its only 9 digits and if it isnt prepend 0's until it is
+            if form.cleaned_data['id_type'] in [0,1]:
+                while len(tz) < 9:
+                    tz = '0' + tz
+            data = form.save(commit=False)
+            data.ID_num = tz
+            data.save()
+            return redirect('search')
         for field, error in form.errors.items():
             messages.warning(request, error)
-        return redirect('list_forms')
-    return render(request, 'midpage.html', {'cid': data.pk})
+        return redirect('update')
+    form = CovidDataForm(instance=covid)
+    return render(request, 'form_page.html', {'form': form, 'previous': previous, 'next': next, 'object': covid})
 
 @login_required
 def export(request, covid_id):
-    export_file(covid_id)
-    messages.success(request, 'קובץ בדיקה ייוצא בהצלחה')
+    covid = CovidData.objects.get(pk=covid_id)
+    if covid.exported:
+        messages.warning(request, 'הקובץ כבר ייוצא פעם אחת, נא לפנות למנהל המערכת.')
+    else:
+        export_file(covid)
+        covid.exported = True
+        covid.save()
+        messages.success(request, 'קובץ בדיקה ייוצא בהצלחה')
     return redirect('search')
 
 
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            key = form.cleaned_data.get('key')
-            if key != settings.SIGNUP_KEY:
-                messages.warning(request, 'קוד הרשמה שגוי, נא לפנות למנהל המערכת')
-                return redirect('signup')
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-
-            user = authenticate(username=username, password=raw_password)
-            permission = Permission.objects.get(codename='add_tz')
-            user.user_permissions.add(permission)
-            login(request, user)
-
-            messages.success(request, 'נרשמת בהצלחה!')
-            return redirect('new_form')
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
 
 @login_required
 def search_tz(request):
@@ -164,3 +125,32 @@ def search_date(request):
         date_string = request.POST.get('search_date')
         objects = CovidData.objects.filter(result_date=datetime.datetime.strptime(date_string, '%m/%d/%Y').date())
     return render(request, 'search.html', {'objects': objects})
+
+
+@login_required
+def create_covid(request):
+    if request.method == 'POST':
+        form = CovidDataForm(request.POST)
+        if form.is_valid():
+            tz = form.cleaned_data['ID_num']
+            # Validate that if field id_type is 0,1 that its only 9 digits and if it isnt prepend 0's until it is
+            if form.cleaned_data['id_type'] in [0, 1]:
+                while len(tz) < 9:
+                    tz = '0' + tz
+
+            # Get data from scanned barcode fields
+            result_date_str = form.cleaned_data['plate_details'].split('/')[0]
+            result_datetime = datetime.datetime.strptime(result_date_str, '%d.%m.%y')
+            sticker_num = form.cleaned_data['patient_details'].split('/')[1]
+            data = form.save(commit=False)
+            data.created_by = request.user
+            data.result_date = result_datetime
+            data.sticker_number = sticker_num
+            data.ID_num = tz
+            data.save()
+            return redirect('search')
+        for field, error in form.errors.items():
+            messages.warning(request, error)
+        return redirect('create')
+    form = CovidDataForm()
+    return render(request, 'new_form.html', {'form': form})

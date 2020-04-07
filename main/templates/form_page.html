@@ -6,14 +6,14 @@
 <form method="post" id="myForm" class="mb-5">
  <div class="row sticky-top ">
  <div class="col-3 d-flex justify-content-center">
-  {% if previous_id %}
-        <a href="{% url 'edit_form' previous_id %}" class="btn btn-success">טופס קודם</a>
+  {% if previous %}
+        <a href="{% url 'update' previous %}" class="btn btn-success">טופס קודם</a>
      {% endif %}
  </div>
 
   <div class="col-3 d-flex justify-content-center">
 
-        <a href="{% url 'export' object.id %}" class="btn btn-warning">ייצוא</a>
+        <a href="{% url 'export' object.id %}" class="btn btn-warning {% if object.exported %}disabled{% endif %}">ייצוא</a>
  </div>
  <div class="col-3 d-flex justify-content-center">
 
@@ -21,15 +21,15 @@
  </div>
   <div class="col-3 d-flex justify-content-center">
 
-     {% if next_id %}
-        <a href="{% url 'edit_form' next_id %}" class="btn btn-info">טופס הבא</a>
+     {% if next %}
+        <a href="{% url 'update' next %}" class="btn btn-info">טופס הבא</a>
      {% endif %}
 </div>
 
     </div>
     {% csrf_token %}
 <div class="row">
-     {% include 'temp.html' with form=form %}
+     {% include 'temp.html' with form=form update=True %}
 </div>
 
 </form>

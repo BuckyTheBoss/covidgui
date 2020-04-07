@@ -1,13 +1,26 @@
 <div class="row">
+    {% if not update %}
     <div class="col-4 mt-2">
-        {{ form.ID_num.errors }}
-         <div class="float-right"><label for="{{ form.ID_num.id_for_label }}">ת"ז*:</label></div>
-        {{ form.ID_num }}
+        {{ form.plate_details.errors }}
+         <div class="float-right"><label for="{{ form.plate_details.id_for_label }}">מספר פלטה*:</label></div>
+        {{ form.plate_details }}
     </div>
+    <div class="col-4 mt-2">
+        {{ form.patient_details.errors }}
+        <div class="float-right"><label for="{{ form.patient_details.id_for_label }}">פרטי נבדק*:</label></div>
+        {{ form.patient_details }}
+    </div>
+    <div class="col-4 mt-2"></div>
+    {% endif %}
     <div class="col-4 mt-2">
         {{ form.id_type.errors }}
         <div class="float-right"><label for="{{ form.id_type.id_for_label }}">סוג תעודה*:</label></div>
         {{ form.id_type }}
+    </div>
+    <div class="col-4 mt-2">
+        {{ form.ID_num.errors }}
+        <div class="float-right"><label for="{{ form.ID_num.id_for_label }}">תעודת זהות*:</label></div>
+        {{ form.ID_num }}
     </div>
     <div class="col-4 mt-2"></div>
     <div class="col-4 mt-2">
