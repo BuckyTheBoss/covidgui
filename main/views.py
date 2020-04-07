@@ -27,7 +27,7 @@ def export_file(covid):
     for key, value in data.items():
 
         if isinstance(value, datetime.date):
-            date_string = value.strftime('%d%m%y')
+            date_string = value.strftime('%d%m%Y')
             data[key] = date_string
         if isinstance(value, int):
             data[key] = str(value)
