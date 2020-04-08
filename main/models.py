@@ -46,6 +46,10 @@ class CovidData(models.Model):
     result_test_corona = models.IntegerField(choices=[(1,'חיובי'), (0,'שלילי'), (2,'בעבודה'), (999,'לא בוצע')])
     exported = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-id']
+
+
     def __str__(self):
         return f'ID: {self.ID_num} Result date:{self.result_date}'
     
