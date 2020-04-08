@@ -1,13 +1,21 @@
 from django.contrib.messages import constants as messages
+import os
+from .settings import BASE_DIR
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'RANDOMLY_GENERATE_APP_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 # Put the address/domain-name where the server will run in the list below
 ALLOWED_HOSTS = ['127.0.0.1', ]
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 LOGIN_REDIRECT_URL = 'new_form'
