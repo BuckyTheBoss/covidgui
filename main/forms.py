@@ -26,6 +26,8 @@ class SignUpForm(UserCreationForm):
 class CovidDataForm(forms.ModelForm):
     plate_details = forms.CharField(required=False)
     patient_details = forms.CharField(required=False)
+    take_date = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=('%d/%m/%Y',), label='תאריך לקיחה')
+    get_date = forms.DateField(widget=forms.DateInput(format='%d/%m/%Y'), input_formats=('%d/%m/%Y',), label='תאריך קבלה')
 
     class Meta:
         model = CovidData

@@ -35,7 +35,7 @@ def export_file(covid):
         if value is None or value == '':
             data[key] = ' '
 
-    filename = f"41997.Negifim.{data['result_date']}.{data['id']}.txt"
+    filename = f"41997.Negifim.{data['result_date']}.{data['sticker_number']}.txt"
     del data['id']
 
     values = [value for value in data.values()]

@@ -51,5 +51,5 @@ class CovidData(models.Model):
 
 
     def __str__(self):
-        return f'ID: {self.ID_num} Result date:{self.result_date}'
+        return f'Sticker Number: {self.sticker_number} Result date:{self.result_date}'
     
