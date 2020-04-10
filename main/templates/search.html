@@ -49,6 +49,10 @@
             </li>
         {% endfor %}
     </ul>
+    {% else %}
+    <h3 class="mt-5">אין כרגע רשומות, על מנת ליצור רשומה חדשה אנא לחץ על הכפתור </h3>
+    <a class="btn btn-primary mx-" href="{% url 'create' %}">טופס חדש <span class="sr-only">(current)</span></a>
+
 {% endif %}
 
 <script>
