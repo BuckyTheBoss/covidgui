@@ -118,16 +118,16 @@ def search_tz(request):
     objects = CovidData.objects.all().order_by('result_date')
     if request.method == 'POST':
         text = request.POST.get('search_tz')
-        objects = CovidData.objects.filter(ID_num__icontains=text)[:7]
-    return render(request, 'search.html', {'objects': objects})
+        objects = CovidData.objects.filter(ID_num__icontains=text)
+    return render(request, 'search.html', {'objects': objects[:7]})
 
 @login_required
 def search_date(request):
     objects = None
     if request.method == 'POST':
         date_string = request.POST.get('search_date')
-        objects = CovidData.objects.filter(result_date=datetime.datetime.strptime(date_string, '%m/%d/%Y').date())[:7]
-    return render(request, 'search.html', {'objects': objects})
+        objects = CovidData.objects.filter(result_date=datetime.datetime.strptime(date_string, '%m/%d/%Y').date())
+    return render(request, 'search.html', {'objects': objects[:7]})
 
 
 @login_required
