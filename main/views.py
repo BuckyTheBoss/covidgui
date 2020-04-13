@@ -21,7 +21,7 @@ import os
 
 def export_file(covid):
     data = model_to_dict(covid)
-    
+
     del data['created_by']
     del data['exported']
     for key, value in data.items():
@@ -104,6 +104,9 @@ def export(request, covid_id):
     covid = CovidData.objects.get(pk=covid_id)
     if covid.exported:
         messages.warning(request, 'הקובץ כבר ייוצא פעם אחת, נא לפנות למנהל המערכת.')
+    elif not covid.result_test_corona:
+        messages.warning(request, 'לקובץ אין שדה תוצאה תקינה, נא לתקן את השדה ולנסות לייצא שוב.')
+        return redirect('search')
     else:
         export_file(covid)
         covid.exported = True
@@ -129,6 +132,16 @@ def search_date(request):
         objects = CovidData.objects.filter(result_date=datetime.datetime.strptime(date_string, '%m/%d/%Y').date())
     return render(request, 'search.html', {'objects': objects})
 
+
+@login_required
+def search_sticker(request):
+    objects = None
+    if request.method == 'POST':
+        data = request.POST.get('search_sticker').split('\\')
+        sticker_num = data[1]
+        sticker_date = data[0]
+        objects = CovidData.objects.filter(sticker_number=sticker_num, result_date=datetime.datetime.strptime(sticker_date, '%m/%d/%Y').date())
+    return render(request, 'search.html', {'objects': objects})
 
 @login_required
 def create_covid(request):

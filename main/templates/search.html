@@ -2,17 +2,19 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-6">
+    <div class="col-4">
         <h5 class="float-right">חיפוש ע"י ת"ז</h5>
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <h5 class="float-right">חיפוש ע"י תאריך ביצוע בדיקה</h5>
-
+    </div>
+    <div class="col-4">
+        <h5 class="float-right">חיפוש ע"י סריקת מדבקת מטופל</h5>
     </div>
 
 </div>
 <div class="row">
-    <div class="col-6">
+    <div class="col-4">
 
         <form method="POST" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
               {% csrf_token %}
@@ -20,7 +22,15 @@
               <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
     </div>
-    <div class="col-6">
+    <div class="col-4">
+
+        <form method="POST" action="{% url 'search_sticker' %}" class="form-inline my-2 my-lg-0">
+              {% csrf_token %}
+              <input type="text" name='search_sticker' class="form-control" placeholder="Search" aria-label="search" aria-describedby="basic-addon2">
+              <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-4">
         <form method="POST" action="{% url 'search_date' %}" class="form-inline my-2 my-lg-0">
             {% csrf_token %}
             <input type="text" name="search_date" class="dateinput form-control" required id="datetimepicker1">

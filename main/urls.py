@@ -13,5 +13,6 @@ urlpatterns = [
     path('', views.index, name='homepage'),
     path('search', views.search_tz, name='search'),
     path('search_date', views.search_date, name='search_date'),
+    path('search_sticker', views.search_sticker, name='search_sticker'),
 
 ]

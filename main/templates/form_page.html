@@ -10,11 +10,12 @@
         <a href="{% url 'update' previous %}" class="btn btn-success">טופס קודם</a>
      {% endif %}
  </div>
-
+{% if object.result_test_corona %}
   <div class="col-3 d-flex justify-content-center">
 
         <a href="{% url 'export' object.id %}" class="btn btn-warning {% if object.exported %}disabled{% endif %}">ייצוא</a>
  </div>
+ {% endif %}
  <div class="col-3 d-flex justify-content-center">
 
  <button type="submit" class="btn btn-primary">שמירת טופס</button>
