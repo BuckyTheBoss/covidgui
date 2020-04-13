@@ -5,18 +5,13 @@
 <h5> פרטי טופס בדיקה</h5>
 <form method="post" id="myForm" class="mb-5" autocomplete="off">
  <div class="row sticky-top ">
- <div class="col-3 d-flex justify-content-center">
+ <div class="col-6 d-flex justify-content-center">
   {% if previous %}
         <a href="{% url 'update' previous %}" class="btn btn-success">טופס קודם</a>
      {% endif %}
  </div>
-{% if object.result_test_corona %}
-  <div class="col-3 d-flex justify-content-center">
 
-        <a href="{% url 'export' object.id %}" class="btn btn-warning {% if object.exported %}disabled{% endif %}">ייצוא</a>
- </div>
- {% endif %}
- <div class="col-3 d-flex justify-content-center">
+ <div class="col-6 d-flex justify-content-center">
 
  <button type="submit" class="btn btn-primary">שמירת טופס</button>
  </div>
